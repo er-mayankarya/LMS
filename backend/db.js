@@ -32,14 +32,7 @@ const purchaseSchema = new Schema({
     userId : Types.ObjectId
 })
 
-const userModel = mongoose.model("User" , userSchema);
-const adminModel = mongoose.model("Admin" , adminSchema);
-const courseModel = mongoose.model("Courses" , courseSchema);
-const purchaseModel = mongoose.model("Purchases" , purchaseSchema);
-
-export default {
-    userModel ,
-    adminModel ,
-    courseModel,
-    purchaseModel
-}
+export const userModel = mongoose.model("User" , userSchema);
+export const adminModel = mongoose.model("Admin" , adminSchema);
+export const courseModel = mongoose.model("Courses" , courseSchema);
+export const purchaseModel = mongoose.model("Purchases" , purchaseSchema);
