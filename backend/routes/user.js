@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userModel , purchaseModel } from "../db.js"
+import { userModel , purchaseModel, courseModel } from "../db.js"
 import jwt from 'jsonwebtoken';
 import { JWT_USER_SECRET } from "../config.js";
 import { userMiddleware } from "../middlewares/userMiddleware.js";
@@ -66,8 +66,19 @@ userRouter.get("/purchases" , userMiddleware, async (req , res) => {
         userId
     })
 
+    let puschasedCourseIds = [];
+
+    for (let i = 0 ; i<purchases.length ; i++){
+        puschasedCourseIds.push(purchases[i].courseId);
+    }
+
+    const courseData = await courseModel.find({
+        _id : { $in : puschasedCourseIds }
+    })
+
     res.json({
-       purchases
+       purchases ,
+       courseData
     })
 
 });
